@@ -142,7 +142,8 @@ class _FirstScreenState extends State<FirstScreen> {
 
     // after the SecondScreen result comes back update the Text widget with it
     setState(() {
-      text = result;
+      text = result[0];
+      text2 = result[1];
     });
   }
 }
@@ -166,6 +167,7 @@ class _SecondScreenState extends State<SecondScreen> {
 
   // this allows us to access the TextField text
   TextEditingController textFieldController = TextEditingController();
+  TextEditingController textSurnameController = TextEditingController();
 
 
   @override
@@ -219,7 +221,7 @@ class _SecondScreenState extends State<SecondScreen> {
             ),
             SizedBox(height: 10.0,),
             TextFormField(
-
+              controller: textSurnameController,
               style: TextStyle(
                 fontSize: 24,
                 color: Colors.white,
@@ -335,7 +337,10 @@ class _SecondScreenState extends State<SecondScreen> {
 
   // get the text in the TextField and send it back to the FirstScreen
   void _sendDataBack(BuildContext context) {
-    String textToSendBack = textFieldController.text;
-    Navigator.pop(context, textToSendBack);
+    List<String> list = List<String>();
+    list.add(textFieldController.text);
+    list.add(textSurnameController.text);
+    //String textToSendBack = textFieldController.text;
+    Navigator.pop(context, list);
   }
 }
